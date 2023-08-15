@@ -1,0 +1,9 @@
+.idea
+.git
+node_modules
+dist
+app-config.ts
+cert
+.DS_Store
+.env
+build.cmd

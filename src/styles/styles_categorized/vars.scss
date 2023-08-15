@@ -1,0 +1,132 @@
+@use "sass:math";
+
+$space-0: 2px !default;
+$space-1: 4px !default;
+$space-2: 8px !default;
+$space-3: 12px !default;
+$space-4: 16px !default;
+$space-5: 20px !default;
+$space-6: 24px !default;
+$space-7: 32px !default;
+$space-8: 40px !default;
+$space-9: 48px !default;
+$space-10: 72px !default;
+$space-11: 96px !default;
+
+
+$columns-count: 12;
+
+$font_default: 'Roboto' !default;
+
+$font-base: 10px;
+
+$font-size-h1: 9.6rem;
+$line-height-h1: 11.2rem;
+$font-size-h2: 6rem;
+$line-height-h2: 7rem;
+$font-size-h3: 4.8rem;
+$line-height-h3: 5.6rem;
+$font-size-h4: 3.4rem;
+$line-height-h4: 4rem;
+$font-size-h5: 2.4rem;
+$line-height-h5: 3.6rem;
+$font-size-h6: 2rem;
+$line-height-h6: 3.2rem;
+
+$font-size-title1: 1.6rem;
+$line-height-title1: 2.8rem;
+$font-size-title2: 1.4rem;
+$line-height-title2: 2rem;
+$font-size-title3: 1.2rem;
+$line-height-title3: 1.6rem;
+
+$font-size-body1: 1.6rem;
+$line-height-body1: 1.4rem;
+$font-size-body2: 1.4rem;
+$line-height-body2: 1.6rem;
+$font-size-body3: 1.2rem;
+$line-height-body3: 1.8rem;
+
+$font-size-button1: 1.4rem;
+$line-height-button1: 1.6rem;
+$font-size-button2: 1.2rem;
+$line-height-button2: 1.4rem;
+$font-size-button3: 1.2rem;
+$line-height-button3: 1.4rem;
+
+$font-size-caption: 1.2rem;
+$line-height-caption: 1.4rem;
+$font-size-overline: 1rem;
+$line-height-overline: 1.2rem;
+
+
+/**
+Hashes
+ */
+$spaceList: (
+  '3xs': $space-0,
+  '2xs': $space-1,
+  'xs': $space-2,
+  's': $space-3,
+  'm': $space-4,
+  'l': $space-5,
+  'xl': $space-6,
+  '2xl': $space-7,
+  '3xl': $space-8,
+  '4xl': $space-9,
+  '5xl': $space-10,
+  '6xl': $space-11,
+);
+
+
+
+$direction: (
+  't': top,
+  'r': right,
+  'b': bottom,
+  'l': left
+);
+
+
+$borderSize: (
+  '0px': 0,
+  '1px': math.div($space-1, 4),
+  '2px': math.div($space-1, 2),
+  '4px': $space-1
+);
+$borderRadius-0: $space-0;
+$borderRadius-1: $space-1;
+$borderRadius-2: $space-2;
+$borderRadius-3: $space-3;
+$borderRadius-4: $space-4;
+$borderRadius-5: $space-5;
+
+
+$borderRadiusSize: (
+  '0': $borderRadius-0,
+  '1': $borderRadius-1,
+  '2': $borderRadius-2,
+  '3': $borderRadius-3,
+  '4': $borderRadius-4,
+  '5': $borderRadius-5
+);
+
+
+$shadow-1: (
+  'offset': $space-1,
+  'blur': 8px,
+  'color': rgba(0, 0, 0, 0.25)
+);$shadow-2: (
+  'offset': $space-2,
+  'blur': 8px,
+  'color': rgba(0, 0, 0, 0.25)
+);$shadow-3: (
+  'offset': $space-4,
+  'blur': 24px,
+  'color': rgba(0, 0, 0, 0.36)
+);
+$shadowHash: (
+  '1': $shadow-1,
+  '2': $shadow-2,
+  '3': $shadow-3
+);

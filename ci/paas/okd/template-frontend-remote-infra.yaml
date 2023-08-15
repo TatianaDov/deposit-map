@@ -1,0 +1,110 @@
+apiVersion: template.openshift.io/v1   
+kind: Template
+labels:
+  app: prv-frontend-remote-infra
+  template: prv-frontend-remote-infra-template
+  app.kubernetes.io/part-of: prv
+metadata:
+  annotations:
+    description: PRV frontend-remote-infra service for all companies
+    openshift.io/display-name: prv-frontend-remote-infra
+    openshift.io/provider-display-name: prv-frontend-remote-infra
+    tags: prv-frontend-remote-infra
+  name: prv-frontend-remote-infra
+objects:
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      labels:
+        app: ${APP_NAME}
+      name: ${APP_NAME}
+      namespace: ${NAMESPACE_NAME}
+    spec:
+      replicas: 1
+      strategy:
+        activeDeadlineSeconds: 21600
+        resources: {}
+        rollingParams:
+          intervalSeconds: 1
+          maxSurge: 0%
+          maxUnavailable: 100%
+          timeoutSeconds: 600
+          updatePeriodSeconds: 1
+        type: Rolling
+      template:
+        metadata:
+          labels:
+            app: ${APP_NAME}
+            deploymentconfig: ${APP_NAME}
+        name: ${APP_NAME}-pod
+        spec:
+          containers:
+            - env:
+              - name: TZ
+                valueFrom: 
+                  configMapKeyRef:
+                    name: dars-main-environment
+                    key: TZ_ORB
+              imagePullPolicy: Always
+              name: ${APP_NAME}
+              livenessProbe:
+                tcpSocket:
+                  port: 5042
+                initialDelaySeconds: 15
+                periodSeconds: 20
+              ports:
+                - containerPort: 5042
+              readinessProbe:
+                tcpSocket:
+                  port: 5042
+                initialDelaySeconds: 15
+                periodSeconds: 20
+              resources: 
+                limits:
+                  cpu: "100m"
+                  memory: "256Mi"
+                requests:
+                  cpu: "25m"
+                  memory: "256Mi"
+              volumeMounts:
+                - mountPath: /app/logs
+                  name: dars-log-vol
+          volumes:
+            - name: dars-log-vol
+              persistentVolumeClaim:
+                 claimName: dars-log-vol
+          dnsPolicy: ClusterFirst
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+      triggers:
+        - type: ConfigChange
+        - imageChangeParams:
+            automatic: true
+            containerNames:
+              - ${APP_NAME}
+            from:
+              kind: ImageStreamTag
+              name: '${APP_NAME}:latest'
+              namespace: ${NAMESPACE_NAME}
+          type: ImageChange
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${APP_NAME}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      ports:
+      - name: "5042"
+        port: 5042
+        targetPort: 5042
+      selector:
+        app: ${APP_NAME}
+status: {}
+parameters:
+- name: APP_NAME
+- name: NAMESPACE_NAME
+- name: REGISTRY_PATH
+- name: OKD_DOMAIN

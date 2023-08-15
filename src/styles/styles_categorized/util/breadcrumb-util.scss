@@ -1,0 +1,14 @@
+@import "../vars";
+
+@mixin breadcrumb($blockItem) {
+  &.breadcrumb, & .breadcrumb {
+    color: map-get($blockItem, "default", "color");
+    &__item-name {
+      color: map-get($blockItem, "default", "color");
+    }
+    &__submenu {
+      background: map-get($blockItem, "secondary", "background-color");
+      color: map-get($blockItem, "secondary", "color");
+    }
+  }
+}

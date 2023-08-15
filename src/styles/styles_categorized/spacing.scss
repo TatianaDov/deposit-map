@@ -1,0 +1,35 @@
+@import 'vars';
+
+$properties: (
+  margin: margin,
+  padding: padding
+);
+
+
+@each $key, $value in $properties {
+  @each $spaceKey, $spaceValue in $spaceList {
+    .#{$key}-h-#{$spaceKey} {
+      #{$key}-left: $spaceValue !important;
+      #{$key}-right: $spaceValue !important;
+    }
+
+    .#{$key}-v-#{$spaceKey} {
+      #{$key}-top: $spaceValue !important;
+      #{$key}-bottom: $spaceValue !important;
+    }
+
+    @each $j, $index in $direction {
+      .#{$key}-#{$j}-#{$spaceKey} {
+        #{$key}-#{$index}: $spaceValue !important;
+      }
+    }
+  }
+}
+
+@each $keyProperties, $valueProperties in $properties {
+  @each $keySpaceList, $valueSpaceList in $spaceList {
+    .#{$keyProperties}-#{$keySpaceList} {
+      #{$keyProperties}: $valueSpaceList !important;
+    }
+  }
+}

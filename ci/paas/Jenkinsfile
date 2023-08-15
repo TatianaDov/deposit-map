@@ -1,0 +1,167 @@
+#!groovy
+
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '100'))
+    }
+
+    environment { APP_NAME = 'frontend-remote-infra' }
+
+    stages {
+        stage("Set build name") {
+            steps {
+				script {
+                    // Если версия не задана в параметрах, берем версию сборки из коммита
+					if(!params.APP_VERSION) {
+                        def commitVersion = sh(
+                            script: "git describe --tags ${GIT_COMMIT} || git rev-parse --short ${GIT_COMMIT}",
+                            returnStdout: true
+                        )
+
+                        // Убираем номер сборки ALM
+                        APP_VERSION = commitVersion.replaceAll("\\+[0-9]+", "").trim()
+                    }
+				}
+
+                // Задаем имя сборки
+                wrap([$class: 'BuildUser']){
+                    script { buildName "${env.BUILD_NUMBER} | ${env.APP_NAME}: ${APP_VERSION}" }
+                    buildDescription "Executed @ ${NODE_NAME}. Build started by ${BUILD_USER}"
+                }
+            }
+        }
+
+        stage ("Build Trust") {
+            when {
+                expression { return params.build_trust }
+            }
+            steps {
+                build job: "./build4/build-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH), 
+                    string(name: 'BUILD_ENVIRONMENT', value: 'trust'),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+                echo "<< 'build-${env.APP_NAME}' completed."
+			}
+        }
+
+        stage ("Check Clair") {
+            when {
+                expression { return params.check_clair }
+            }
+            steps {
+                build job: "./Tools/Clair/check-clair", parameters: [
+                    string(name: 'APP_NAME', value: env.APP_NAME),
+                    string(name: 'APP_VERSION', value: APP_VERSION),
+                    string(name: 'BUILD_ENVIRONMENT', value: 'trust')
+                ]
+                echo "<< 'check-clair for ${env.APP_NAME}' completed."
+            }
+        }
+
+        stage ("Check Dtrack") {
+            when {
+                expression { return params.check_dtrack }
+            }
+            steps {
+                build job: "./Tools/Dtrack/check-dtrack-${env.APP_NAME}", parameters: [
+                    string(name: 'APP_BRANCH', value: params.BRANCH)
+                ]
+                echo "<< 'check-dtrack-${env.APP_NAME}' completed."
+			}
+        }
+
+        stage ("Check Sast") {
+            when {
+                expression { return params.check_sast }
+            }
+            steps {
+                build job: "./Tools/Sast/check-sast", parameters: [
+                    string(name: 'REPO_NAME', value: 'U190001633_fa'),
+                    string(name: 'REPO_BRANCH', value: params.BRANCH),
+                    string(name: 'MAIL_FOR_RESULT', value: params.MAIL_FOR_RESULT)
+                ]
+                echo "<< 'check-sast for ${env.APP_NAME}' completed."
+			}
+        }
+
+        stage ("Transfer Image") {
+            when {
+                expression { return params.transfer_image }
+            }
+            steps {
+                build job: "./Tools/Transfer/transfer-${env.APP_NAME}", parameters: [
+                    string(name: 'IMAGE', value: "u190001633dars/${env.APP_NAME}:${APP_VERSION}"),
+                    string(name: 'APP_BRANCH', value: params.BRANCH), 
+                    string(name: 'aprv_cc_mail', value: params.MAIL_FOR_RESULT)
+                ]
+                echo "<< 'transfer-image-${env.APP_NAME}' completed."
+			}
+        }
+
+        stage('Deploy UAT') {
+			when {
+                expression { return params.deploy_uat }  
+            }
+            environment { OCP_FOLDER = 'uat-uat4-u190001633dars' }
+            steps {
+
+                build job: "./${env.OCP_FOLDER}/template-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                build job: "./${env.OCP_FOLDER}/deploy-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                echo "<< deploy for UAT successfully completed."
+            }
+        }
+
+        stage('Deploy PPROD') {
+			when {
+                expression { return params.deploy_preprod }  
+            }
+            environment { OCP_FOLDER = 'preprod-preprod4-u190001633dars' }
+            steps {
+
+                build job: "./${env.OCP_FOLDER}/template-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                build job: "./${env.OCP_FOLDER}/deploy-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                echo "<< deploy for PREPROD successfully completed."
+            }
+        }
+
+        stage('Deploy PROD') {
+			when {
+                expression { return params.deploy_prod }  
+            }
+            environment { OCP_FOLDER = 'prod-prod4-u190001633dars' }
+            steps {
+
+                build job: "./${env.OCP_FOLDER}/template-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                build job: "./${env.OCP_FOLDER}/deploy-${env.APP_NAME}", parameters: [
+                    gitParameter(name: 'BRANCH', value: params.BRANCH),
+                    string(name: 'APP_VERSION', value: APP_VERSION)
+                ]
+
+                echo "<< deploy for PROD successfully completed."
+            }
+        }
+    }
+}

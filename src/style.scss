@@ -1,0 +1,12 @@
+@import "styles/common";
+
+.header {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+
+  &__fixed-top {
+    position: sticky;
+    top: 0;
+  }
+}

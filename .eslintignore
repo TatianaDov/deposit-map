@@ -1,0 +1,8 @@
+*.spec.ts
+*.d.ts
+*.js
+*.md
+**/node_modules
+dist/
+
+

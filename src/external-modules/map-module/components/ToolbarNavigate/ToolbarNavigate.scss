@@ -1,0 +1,27 @@
+
+.navigate-info{
+margin-top: 10px;
+margin-left: 10px;
+}
+.zoom-wrapp{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding-top:5px ;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    padding-left:5px ;
+    gap: 5px;
+}
+.item-zoom-wrapp{
+    position: relative;
+}
+.item-zoom{
+    width: 96px;
+    
+}
+.remove-button{
+    position: absolute;
+    right: -10px;
+}
