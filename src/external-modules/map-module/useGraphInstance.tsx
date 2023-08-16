@@ -7,17 +7,18 @@ import { graphOptions, registerConfig, registerSimpleNode } from './constants';
 
 export const useGraphInstance = () => {
   const ref = useRef<Graph | null>(null);
-
+  
+  
   useEffect(() => {
     register({
       shape: 'dag-simple-node',
-      component: props => null,
+      component: props => <></> ,
       ...registerSimpleNode,
     });
 
     register({
       shape: 'dag-node',
-      component: props => null,
+      component: props =>  <></>,
       ...registerConfig,
     });
 

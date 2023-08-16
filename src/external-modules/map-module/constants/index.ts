@@ -82,138 +82,138 @@ export const dayFilterItems: dayItem[] = [
 ];
 export const themeValues: Theme[] = ['Default', 'Dark'];
 
-// export const registerConfig: Omit<ReactShapeConfig, 'component'> = {
-//   width: 96,
-//   height: 96,
-//   portMarkup: [
-//     {
-//       tagName: 'rect',
-//       selector: 'body',
-//     },
-//     {
-//       tagName: 'circle',
-//       selector: 'circle',
-//       className: 'x6-port-body',
-//     },
-//     {
-//       tagName: 'g',
-//       selector: 'buttonGroup',
-//       children: [
-//         {
-//           tagName: 'path',
-//           selector: 'buttonSign',
-//           attrs: {
-//             'pointer-events': 'none',
-//           },
-//         },
-//       ],
-//     },
-//   ],
-//   ports: {
-//     groups: {
-//       top: {
-//         position: 'top',
-//         attrs: {
-//           circle: {
-//             r: 8,
-//             magnet: false,
-//             stroke: '#C2C8D5',
-//             strokeWidth: 1,
-//             fill: '#fff',
-//             cursor: 'pointer',
-//             event: 'node:top',
-//           },
-//           buttonGroup: {
-//             refX: '100%',
-//             refY: '50%',
-//           },
-//           buttonSign: {
-//             refX: -5,
-//             refY: -5,
-//             stroke: 'grey',
-//             strokeWidth: 1.6,
-//             d: 'M 2 5 8 5',
-//           },
-//         },
-//       },
-//       bottom: {
-//         position: 'bottom',
-//         attrs: {
-//           circle: {
-//             r: 8,
-//             magnet: false,
-//             stroke: '#C2C8D5',
-//             strokeWidth: 1,
-//             fill: '#fff',
-//             cursor: 'pointer',
-//             event: 'node:bottom',
-//           },
-//           buttonGroup: {
-//             refX: '100%',
-//             refY: '50%',
-//           },
-//           buttonSign: {
-//             refX: -5,
-//             refY: -5,
-//             stroke: 'grey',
-//             strokeWidth: 1.6,
-//             d: 'M 2 5 8 5',
-//           },
-//         },
-//       },
-//       left: {
-//         position: 'left',
-//         attrs: {
-//           circle: {
-//             r: 8,
-//             magnet: false,
-//             stroke: '#C2C8D5',
-//             strokeWidth: 1,
-//             fill: '#fff',
-//             cursor: 'pointer',
-//             event: 'node:left',
-//           },
-//           buttonGroup: {
-//             refX: '100%',
-//             refY: '50%',
-//           },
-//           buttonSign: {
-//             refX: -5,
-//             refY: -5,
-//             stroke: 'grey',
-//             strokeWidth: 1.6,
-//             d: 'M 2 5 8 5',
-//           },
-//         },
-//       },
-//       right: {
-//         position: 'right',
-//         attrs: {
-//           circle: {
-//             r: 8,
-//             magnet: false,
-//             stroke: '#C2C8D5',
-//             strokeWidth: 1,
-//             fill: '#fff',
-//             cursor: 'pointer',
-//             event: 'node:right',
-//           },
-//           buttonGroup: {
-//             refX: '100%',
-//             refY: '50%',
-//           },
-//           buttonSign: {
-//             refX: -5,
-//             refY: -5,
-//             stroke: 'grey',
-//             strokeWidth: 1.6,
-//             d: 'M 2 5 8 5',
-//           },
-//         },
-//       },
-//     },
-//   },
-// };
+export const registerConfig: Omit<ReactShapeConfig, 'component'> = {
+  width: 96,
+  height: 96,
+  portMarkup: [
+    {
+      tagName: 'rect',
+      selector: 'body',
+    },
+    {
+      tagName: 'circle',
+      selector: 'circle',
+      className: 'x6-port-body',
+    },
+    {
+      tagName: 'g',
+      selector: 'buttonGroup',
+      children: [
+        {
+          tagName: 'path',
+          selector: 'buttonSign',
+          attrs: {
+            'pointer-events': 'none',
+          },
+        },
+      ],
+    },
+  ],
+  ports: {
+    groups: {
+      top: {
+        position: 'top',
+        attrs: {
+          circle: {
+            r: 8,
+            magnet: false,
+            stroke: '#C2C8D5',
+            strokeWidth: 1,
+            fill: '#fff',
+            cursor: 'pointer',
+            event: 'node:top',
+          },
+          buttonGroup: {
+            refX: '100%',
+            refY: '50%',
+          },
+          buttonSign: {
+            refX: -5,
+            refY: -5,
+            stroke: 'grey',
+            strokeWidth: 1.6,
+            d: 'M 2 5 8 5',
+          },
+        },
+      },
+      bottom: {
+        position: 'bottom',
+        attrs: {
+          circle: {
+            r: 8,
+            magnet: false,
+            stroke: '#C2C8D5',
+            strokeWidth: 1,
+            fill: '#fff',
+            cursor: 'pointer',
+            event: 'node:bottom',
+          },
+          buttonGroup: {
+            refX: '100%',
+            refY: '50%',
+          },
+          buttonSign: {
+            refX: -5,
+            refY: -5,
+            stroke: 'grey',
+            strokeWidth: 1.6,
+            d: 'M 2 5 8 5',
+          },
+        },
+      },
+      left: {
+        position: 'left',
+        attrs: {
+          circle: {
+            r: 8,
+            magnet: false,
+            stroke: '#C2C8D5',
+            strokeWidth: 1,
+            fill: '#fff',
+            cursor: 'pointer',
+            event: 'node:left',
+          },
+          buttonGroup: {
+            refX: '100%',
+            refY: '50%',
+          },
+          buttonSign: {
+            refX: -5,
+            refY: -5,
+            stroke: 'grey',
+            strokeWidth: 1.6,
+            d: 'M 2 5 8 5',
+          },
+        },
+      },
+      right: {
+        position: 'right',
+        attrs: {
+          circle: {
+            r: 8,
+            magnet: false,
+            stroke: '#C2C8D5',
+            strokeWidth: 1,
+            fill: '#fff',
+            cursor: 'pointer',
+            event: 'node:right',
+          },
+          buttonGroup: {
+            refX: '100%',
+            refY: '50%',
+          },
+          buttonSign: {
+            refX: -5,
+            refY: -5,
+            stroke: 'grey',
+            strokeWidth: 1.6,
+            d: 'M 2 5 8 5',
+          },
+        },
+      },
+    },
+  },
+};
 
 export const registerSimpleNode: Omit<ReactShapeConfig, 'component'> = {
   width: 96,

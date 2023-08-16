@@ -11,7 +11,7 @@ class RootStore {
   constructor() {
     this.host = new StoreHost();
     this.meteo = new StoreMeteo(this);
-    this.depositsMap = new StoreDepositsMap();
+    this.depositsMap = new StoreDepositsMap(this);
   }
 }
 

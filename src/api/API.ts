@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BASE_URL, CURRENT_USER } from '../appConfig';
 
 const API = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "http://localhost:3005/upng",
   responseType: 'json',
   headers: {
     'content-type': 'application/json',

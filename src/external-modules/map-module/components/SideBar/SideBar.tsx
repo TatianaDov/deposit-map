@@ -7,7 +7,7 @@ import { IconForward } from '@consta/uikit/IconForward';
 import { IconBackward } from '@consta/uikit/IconBackward';
 import { Combobox } from '@consta/uikit/Combobox';
 import { Grid, GridItem } from '@consta/uikit/Grid';
-
+import {tabItems} from '../../constants/index'
 import './SideBar.scss';
 
 type Item = {
@@ -34,9 +34,9 @@ function SideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isExpandSideBar, setIsExpandSideBar] = useState(false);
   const [isSideBarSize, setIsSideBarSize] = useState<any>('1/4');
-  const items: string[] = ['Информация', 'Связанные объекты'];
+  
   const getItemLabel = (label: string) => label;
-  const [value, setValue] = useState<string | null>(items[0]);
+  const [value, setValue] = useState<string | null>(tabItems[0]);
 
   const handleExpandSideBar = () => {
     setIsExpandSideBar(true);
@@ -61,7 +61,7 @@ function SideBar() {
             className="sidebar-info"
             value={value}
             onChange={({ value }) => setValue(value)}
-            items={items}
+            items={tabItems}
             getItemLabel={getItemLabel}
           />
           <Text className="sidebar-info" weight="light" size="s">
@@ -76,7 +76,7 @@ function SideBar() {
             placeholder="Не выбрано"
             items={itemsValue}
             value={itemValue}
-            onChange={({ value }) => setItemValue(itemValue)}
+            onChange={({ value }) => setItemValue(value)}
           />
           <Text className="sidebar-info" weight="semibold">
             Добыча:
