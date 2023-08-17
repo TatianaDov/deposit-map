@@ -5,19 +5,18 @@ import { IconAdd } from '@consta/uikit/IconAdd';
 import { IconRemove } from '@consta/uikit/IconRemove';
 import { TextField } from '@consta/uikit/TextField';
 import { IconClose } from '@consta/uikit/IconClose';
+import { Graph } from '@antv/x6';
 import './ToolbarNavigate.scss';
+
 function ToolbarNavigate() {
+ 
   const [zoomLavel, setZoomLavel] = useState<number | any>(10);
 
   const handleZoomIn = () => {
-    if (zoomLavel < 200) {
-      setZoomLavel(zoomLavel + 10);
-    }
+    
   };
   const handleZoomOut = () => {
-    if (zoomLavel > 10) {
-      setZoomLavel(zoomLavel - 10);
-    }
+   
   };
 const handleResetItem=()=>{
   setZoomLavel(null);

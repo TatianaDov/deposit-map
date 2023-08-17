@@ -8,7 +8,10 @@ import { IconBackward } from '@consta/uikit/IconBackward';
 import { Combobox } from '@consta/uikit/Combobox';
 import { Grid, GridItem } from '@consta/uikit/Grid';
 import {tabItems} from '../../constants/index'
+import { observer } from 'mobx-react-lite';
+import { rootStore } from 'src/store';
 import './SideBar.scss';
+import { BaseChart } from 'src/components/charts';
 
 type Item = {
   label: string;
@@ -29,7 +32,7 @@ const itemsValue: Item[] = [
     id: 3,
   },
 ];
-function SideBar() {
+const SideBar = observer(() => {
   const [itemValue, setItemValue] = useState<Item | null>();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isExpandSideBar, setIsExpandSideBar] = useState(false);
@@ -92,6 +95,7 @@ function SideBar() {
             <GridItem>Жидкость(ВР)</GridItem>
             <GridItem>Нефть(ВР)</GridItem>
           </Grid>
+          
           <Text weight="semibold">
            ВСП:
           </Text>
@@ -122,6 +126,6 @@ function SideBar() {
       </Sidebar>
     </>
   );
-}
+})
 
-export { SideBar };
+export default SideBar ;

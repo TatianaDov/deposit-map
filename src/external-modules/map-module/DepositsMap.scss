@@ -7,7 +7,25 @@
   .map_padder {
   }
 }
-
+.node-text{
+  display: flex;
+  justify-content: space-between;
+ margin-top: 10px;
+  font-size: x-small;
+  color: gray;
+  font-weight: 500;
+}
+.node-header{
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+ 
+}
+.node-wrapper{
+max-width: 96px;
+padding: 7px;
+height: 96px;
+}
 .map_container {
   //padding: 25px 40px;
   width: 100%;
@@ -19,14 +37,19 @@
   height: 100%;
   background: var(--color-bg-default);
   color: #002033;
+  
+  
 }
 
 .x6-node {
   foreignObject {
     overflow: hidden;
-    background-color: var(--color-bg-ghost);
-    //padding:5px;
-    //margin:-5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+   
+    display: flex;
+  justify-content: space-between;
+  
   }
 }
 
@@ -108,7 +131,7 @@
 }
 
 .x6-collapsed {
-  fill: grey;
+  
 }
 
 @media screen and (max-width: 62.5rem) {

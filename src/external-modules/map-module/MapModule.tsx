@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-
 import { useHost } from '../../hooks';
 import { getRoutes } from '../../routes';
 import { rootStore } from '../../store';

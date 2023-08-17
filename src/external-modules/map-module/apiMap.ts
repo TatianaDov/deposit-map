@@ -1,11 +1,24 @@
 import API from '../../api/API';
 
-import { TNodeData,InfraData } from './typesDepositsMap';
-
-const getInfra = () => {
+export const getDataInfra = () => {
     
-  return API.get('');
+  return API.get('/upng');
   
 };
 
-export { getInfra };
+export const getTNodeData = () => {
+    
+  return API.get('/tl');
+  
+};
+export const getGsuData = () => {
+    
+  return API.get('/gsu');
+  
+};
+
+export const getRelatedObjects = () => {
+    
+  return API.get('/related_objects');
+  
+};

@@ -1,9 +1,13 @@
 import { makeAutoObservable } from 'mobx';
 import { RootStore } from '../../store';
-import { getInfra } from './apiMap';
+import { getDataInfra, getTNodeData, getGsuData,getRelatedObjects } from './apiMap';
+import { InfraData, TNodeData, GsuData,RelatedObject } from './typesDepositsMap';
 
 export class StoreDepositsMap {
-  myNodeName =  []
+  nodeDataUPNG: InfraData[] = [];
+  nodeTLData: TNodeData[] = [];
+  nodeGsuData: GsuData[] = [];
+  dataRelatedObject:RelatedObject[]=[]
   readonly rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
@@ -11,12 +15,28 @@ export class StoreDepositsMap {
     this.rootStore = rootStore;
   }
 
-  fetchMap = async () => {
-      const {data} = await getInfra()
+  fetchUpng = async () => {
+    const { data } = await getDataInfra();
 
-    this.myNodeName = data
-     
+    this.nodeDataUPNG = data;
+  };
+  fetchTNodeData = async () => {
+    const { data } = await getTNodeData();
 
+    this.nodeTLData = data;
+  };
+  fetchGsuData = async () => {
+    const { data } = await getGsuData();
 
+    this.nodeGsuData = data;
+  };
+  fetchRelatedObjectData=async()=>{
+const{data}= await getRelatedObjects()
+this.dataRelatedObject = data;
+  }
+  fetchAll = () => {
+    this.fetchUpng();
+    this.fetchTNodeData();
+    this.fetchGsuData();
   };
 }

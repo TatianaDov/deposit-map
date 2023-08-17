@@ -141,7 +141,30 @@ export type InfraData = {
     args: object;
   };
 };
-
+export type GsuData={
+  
+      coordX: number,
+      coordY: number,
+      id: string,
+      name: string,
+      objType: number,
+      pAg: number,
+      pAgDesc: string,
+      pAgState: number,
+      pAgStateColor: number,
+      pLinHigh: null,
+      pLinHighColor: null,
+      pLinHighDesc: null,
+      pLinHighState: null,
+      pLinLow: number,
+      pLinLowColor: number,
+      pLinLowDesc: string,
+      pLinLowState: number,
+      routeId: number,
+      state: number,
+      tlId: string
+    
+}
 export interface NodeDataProps {
   info: TNodeData | null;
 }

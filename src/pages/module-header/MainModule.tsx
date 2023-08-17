@@ -7,9 +7,9 @@ import Meteo from '../../external-modules/meteo-module/components/Meteo';
 
 
 function MainModule() {
-  const { fetchMap } = rootStore.depositsMap;
+  const { fetchAll } = rootStore.depositsMap;
   useEffect(() => {
-    fetchMap();
+    fetchAll();
   }, []);
 
   return (
